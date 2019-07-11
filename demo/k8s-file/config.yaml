@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server
+  labels:
+    app: config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config
+  template:
+    metadata:
+      labels:
+        app: config
+    spec:
+      containers:
+      - name: config
+        image: registry.example.com/config:latest
+        env:
+        - name: URI
+          value: http://gogs-xyz-gogs.apps.example.com/gogs/lab-res
+        ports:
+        - containerPort: 7001
